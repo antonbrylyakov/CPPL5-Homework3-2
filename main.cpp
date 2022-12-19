@@ -5,20 +5,14 @@ int main()
 {
 	setlocale(LC_ALL, "Russian");
 
-	try {
-		SmartArray arr(5);
-		arr.addElement(1);
-		arr.addElement(4);
-		arr.addElement(155);
-		arr.addElement(14);
-		arr.addElement(15);
+	SmartArray arr(5);
+	arr.addElement(1);
+	arr.addElement(4);
+	arr.addElement(155);
 
-		for (auto i = 0; i < arr.getLength(); ++i)
-		{
-			std::cout << "arr[" << i << "]: " << arr.getElement(i) << std::endl;
-		}
-	}
-	catch (const std::exception& ex) {
-		std::cout << ex.what() << std::endl;
-	}
+	SmartArray newArray(2);
+	newArray.addElement(44);
+	newArray.addElement(34);
+
+	arr = newArray;
 }

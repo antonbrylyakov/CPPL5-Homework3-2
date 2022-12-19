@@ -7,9 +7,22 @@ SmartArray::SmartArray(size_t size)
 	m_size = size;
 }
 
+SmartArray::SmartArray(const SmartArray& src)
+{
+	copyFrom(src);
+}
+
+SmartArray& SmartArray::operator =(const SmartArray& src)
+{
+	// При присваивании в существующий объект не только копируем, но и очищаем старые данные
+	cleanup();
+	copyFrom(src);
+	return *this;
+}
+
 SmartArray::~SmartArray()
 {
-	delete[] m_elements;
+	cleanup();
 }
 
 void SmartArray::addElement(int value)
@@ -39,4 +52,21 @@ int SmartArray::getElement(size_t index)
 size_t SmartArray::getLength()
 {
 	return m_head;
+}
+
+void SmartArray::copyFrom(const SmartArray& src)
+{
+	m_elements = new int[src.m_size];
+	for (auto i = 0; i < src.m_head; ++i)
+	{
+		m_elements[i] = src.m_elements[i];
+	}
+
+	m_head = src.m_head;
+	m_size = src.m_size;
+}
+
+void SmartArray::cleanup()
+{
+	delete[] m_elements;
 }
