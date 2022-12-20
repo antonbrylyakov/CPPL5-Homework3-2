@@ -14,9 +14,14 @@ SmartArray::SmartArray(const SmartArray& src)
 
 SmartArray& SmartArray::operator =(const SmartArray& src)
 {
-	// При присваивании в существующий объект не только копируем, но и очищаем старые данные
-	cleanup();
-	copyFrom(src);
+	// Избегаем копирования объекта самого в себя
+	if (&src != this)
+	{
+		// При присваивании в существующий объект не только копируем, но и очищаем старые данные
+		cleanup();
+		copyFrom(src);
+	}
+
 	return *this;
 }
 

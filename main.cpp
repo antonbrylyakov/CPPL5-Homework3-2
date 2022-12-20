@@ -15,4 +15,5 @@ int main()
 	newArray.addElement(34);
 
 	arr = newArray;
+	newArray = newArray;
 }
